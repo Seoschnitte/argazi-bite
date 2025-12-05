@@ -79,7 +79,7 @@ Edge функция уже развернута. Убедитесь, что пе
 
 ```typescript
 export default defineConfig({
-  base: '/your-repo-name/',
+  base: '/argazi-bite/',
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
