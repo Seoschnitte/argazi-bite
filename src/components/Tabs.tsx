@@ -19,10 +19,10 @@ export function Tabs({ activePeriod, onPeriodChange }: TabsProps) {
         <button
           key={tab.value}
           onClick={() => onPeriodChange(tab.value)}
-          className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
+          className={`px-4 py-2 rounded-xl font-semibold whitespace-nowrap transition-all active:scale-95 ${
             activePeriod === tab.value
-              ? 'bg-blue-600 text-white'
-              : 'bg-white text-gray-700 hover:bg-gray-100'
+              ? 'bg-blue-600 text-white shadow-sm'
+              : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
           }`}
         >
           {tab.label}

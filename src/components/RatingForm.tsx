@@ -130,10 +130,10 @@ export function RatingForm({ fishTypes, telegramUserId, onClose, onSuccess }: Ra
 
   if (success) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-lg p-6 max-w-md w-full text-center">
-          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold mb-2">Спасибо!</h2>
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center shadow-xl">
+          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4 animate-bounce" />
+          <h2 className="text-2xl font-bold mb-2">Спасибо!</h2>
           <p className="text-gray-600">Ваша оценка учтена.</p>
         </div>
       </div>
@@ -141,16 +141,19 @@ export function RatingForm({ fishTypes, telegramUserId, onClose, onSuccess }: Ra
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full my-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Оценить клёв</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
+      <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 max-w-md w-full my-8 shadow-xl border border-gray-100">
+        <div className="flex justify-between items-center mb-5">
+          <h2 className="text-xl font-bold text-gray-900">Оценить клёв</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full p-1 transition-colors"
+          >
             <X className="w-6 h-6" />
           </button>
         </div>
 
-        <p className="text-sm text-gray-600 mb-6">
+        <p className="text-sm text-gray-600 mb-6 leading-relaxed">
           Выберите рыбу которую ловили и оцените ее активность по шкале 1–5. Ставить оценки можно
           не чаще чем каждые 6 часов, поэтому лучше всего сделать это в конце рыболовной сессии.
         </p>
@@ -163,27 +166,29 @@ export function RatingForm({ fishTypes, telegramUserId, onClose, onSuccess }: Ra
             return (
               <div
                 key={fish.id}
-                className={`border rounded-lg p-4 ${!canRate ? 'opacity-50 bg-gray-50' : ''}`}
+                className={`border border-gray-100 rounded-xl p-4 transition-all ${
+                  !canRate ? 'opacity-50 bg-gray-50' : 'bg-white hover:shadow-sm'
+                }`}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <Fish className="w-5 h-5 text-blue-600" />
-                  <span className="font-medium">{fish.name_ru}</span>
+                  <span className="font-semibold text-gray-900">{fish.name_ru}</span>
                   {!canRate && (
-                    <span className="text-xs text-red-600 ml-auto">
-                      Можно оценить через 6 часов
+                    <span className="text-xs text-red-600 ml-auto font-medium">
+                      Через 6 часов
                     </span>
                   )}
                 </div>
 
                 {canRate && (
-                  <div className="flex gap-2">
+                  <div className="flex gap-1.5">
                     {[1, 2, 3, 4, 5].map((value) => (
                       <button
                         key={value}
                         onClick={() => handleRatingChange(fish.id, value)}
-                        className={`flex-1 py-2 rounded-lg font-medium transition-colors ${
+                        className={`flex-1 py-2.5 rounded-lg font-semibold transition-all active:scale-95 ${
                           currentRating === value
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-blue-600 text-white shadow-sm'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                       >
@@ -198,7 +203,7 @@ export function RatingForm({ fishTypes, telegramUserId, onClose, onSuccess }: Ra
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm flex items-start gap-2">
+          <div className="mb-4 p-3.5 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm flex items-start gap-2">
             <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>{error}</span>
           </div>
@@ -207,7 +212,7 @@ export function RatingForm({ fishTypes, telegramUserId, onClose, onSuccess }: Ra
         <button
           onClick={handleSubmit}
           disabled={loading || ratings.size === 0}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm"
         >
           {checkingLocation ? 'Проверка геолокации...' : loading ? 'Отправка...' : 'Отправить'}
         </button>
