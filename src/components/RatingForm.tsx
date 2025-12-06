@@ -121,7 +121,7 @@ export function RatingForm({ fishTypes, telegramUserId, onClose, onSuccess }: Ra
         onClose();
       }, 2000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Ошибка! Включите геолокацию на вашем устройстве.');
+      setError(err instanceof Error ? err.message : 'Ошибка! Включите геолокацию на устройстве.');
     } finally {
       setLoading(false);
       setCheckingLocation(false);
