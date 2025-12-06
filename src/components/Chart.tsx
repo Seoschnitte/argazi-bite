@@ -50,6 +50,7 @@ export function Chart({ data, fishTypes, title, xAxisLabel }: ChartProps) {
             axisLine={{ stroke: '#e5e7eb' }}
           />
           <Tooltip
+            wrapperStyle={{ outline: "none" }}
             contentStyle={{
               backgroundColor: '#ffffff',
               border: '1px solid #e5e7eb',
